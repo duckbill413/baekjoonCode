@@ -1,0 +1,7 @@
+diff a/1.c b/1.c	(rejected hunks)
+@@ -0,0 +1,5 @@
++#include <stdio.h>
++
++int main(){
++    printf("hello this is c internattional");
++}
