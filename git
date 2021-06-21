@@ -12,4 +12,3 @@ git checkout [branch_name] // branch_name의 branch로 넘어간다
 git merge [branch_name] // 변화를 가져올 branch_name을 입력
 git rebase [branch_name] //소스트리를 합친다(재배치)
 git branch -D [branch_name] //branch_name을 삭제
-
