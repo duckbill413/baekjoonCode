@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//재귀함수의 표현
 int fun(int);
 
 int main()
@@ -11,7 +11,7 @@ int main()
     return 0;
 }
 
-int fun(int n)
+int fun(int n)//재귀함수
 {
     if (n <= 1)
         return n;
