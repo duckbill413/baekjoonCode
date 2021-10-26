@@ -1,29 +1,45 @@
 #include <stdio.h>
-//ìˆ˜ ì •ë ¬í•˜ê¸°(ì˜¤ë¦„ì°¨ìˆœ)
-//ë²„ë¸”ì •ë ¬
+#include <stdlib.h>
+
+int compare(const void *a, const void *b)
+{
+    int num1 = *(int *)a;
+    int num2 = *(int *)b;
+
+    if (num1 < num2)
+        return -1;
+    else if (num1 > num2)
+        return 1;
+    else
+        return 0;
+}
 int main()
 {
     int cnt;
     scanf("%d", &cnt);
-    int num[10000] = {0};
-    for (int i = 0; i < cnt; i++)
-        scanf("%d", &num[i]);
+    int num[1000000];
+    for (int *pn = num; pn < num + cnt; pn++)
+        scanf("%d", pn);
 
-    for (int i = 0; i < cnt - 1; i++)
-    {
-        for (int j = 0; j < cnt - i - 1; j++)
-        {
-            if (num[j] > num[j + 1])
-            {
-                int tmp = num[j + 1];
-                num[j + 1] = num[j];
-                num[j] = tmp;
-            }
-        }
-    }
+    qsort(num, cnt, sizeof(int), compare);
 
-    for (int i = 0; i < cnt; i++)
-        printf("%d\n", num[i]);
-
+    for (int *pn = num; pn < num + cnt; pn++)
+        printf("%d\n", *pn);
     return 0;
 }
+
+/*
+int compare(const void *a, const void *b)    // ¿À¸§Â÷¼ø ºñ±³ ÇÔ¼ö ±¸Çö
+{
+    int num1 = *(int *)a;    // void Æ÷ÀÎÅÍ¸¦ int Æ÷ÀÎÅÍ·Î º¯È¯ÇÑ µÚ ¿ªÂüÁ¶ÇÏ¿© °ªÀ» °¡Á®¿È
+    int num2 = *(int *)b;    // void Æ÷ÀÎÅÍ¸¦ int Æ÷ÀÎÅÍ·Î º¯È¯ÇÑ µÚ ¿ªÂüÁ¶ÇÏ¿© °ªÀ» °¡Á®¿È
+
+    if (num1 < num2)    // a°¡ bº¸´Ù ÀÛÀ» ¶§´Â
+        return -1;      // -1 ¹ÝÈ¯
+
+    if (num1 > num2)    // a°¡ bº¸´Ù Å¬ ¶§´Â
+        return 1;       // 1 ¹ÝÈ¯
+
+    return 0;    // a¿Í b°¡ °°À» ¶§´Â 0 ¹ÝÈ¯
+}
+*/

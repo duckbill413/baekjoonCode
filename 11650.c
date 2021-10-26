@@ -1,45 +1,106 @@
 #include <stdio.h>
-//좌표 정렬하기
-void swap(int *, int *);
+#include <stdlib.h>
+#pragma warning(disable:4996)
+typedef struct point
+{
+    int x, y;
+} Point;
+
+void swap(Point*, Point*);
+int Partition(Point*, int, int, int);
+void QuickSort(Point*, int, int, int);
 
 int main()
 {
     int n;
     scanf("%d", &n);
+    Point* po = (Point*)malloc(sizeof(Point) * n);
 
-    int num[100000][2] = {0};
+    for (Point* p = po; p < po + n; p++)
+        scanf("%d %d", &p->x, &p->y);
 
-    for (int i = 0; i < n; i++)
-        scanf("%d %d", &num[i][0], &num[i][1]);
-
+    QuickSort(po, 0, n - 1, 1);
+    //QuickSort(po, 0, n - 1, 0);
+    int left = 0;
+    int right = n - 1;
+    int cnt = 0;
     for (int i = 0; i < n - 1; i++)
     {
-        for (int j = 0; j < n - i - 1; j++)
-        {
-            if (num[j][0] > num[j + 1][0])
-            {
-                swap(&num[j][0], &num[j + 1][0]);
-                swap(&num[j][1], &num[j + 1][1]);
-            }
-            else if (num[j][0] == num[j + 1][0])
-            {
-                if (num[j][1] > num[j + 1][1])
-                {
-                    swap(&num[j][0], &num[j + 1][0]);
-                    swap(&num[j][1], &num[j + 1][1]);
-                }
-            }
+        while ((po + i)->x == (po + i + 1)->x) {
+            right = i + 1;
+            cnt++;
+            i++;
         }
+        if (cnt >= 1)
+        {
+            left = right - cnt;
+            QuickSort(po, left, right, 1);
+        }
+        cnt = 0;
     }
-    for (int i = 0; i < n; i++)
-        printf("%d %d\n", num[i][0], num[i][1]);
 
+    for (Point* p = po; p < po + n; p++)
+        printf("%d %d\n", p->x, p->y);
+
+    free(po);
     return 0;
 }
 
-void swap(int *a, int *b)
+void swap(Point* a, Point* b)
 {
-    int tmp = *a;
+    Point tmp = *a;
     *a = *b;
     *b = tmp;
+}
+
+int Partition(Point* po, int left, int right, int select)
+{
+    if (select == 0)
+    {
+        int pivot = (po+left)->x;
+        int low = left + 1;
+        int high = right;
+
+        while (low <= high)
+        {
+            while (pivot >= (po + low)->x && low <= right)
+                low++;
+            while (pivot <= (po + high)->x && high >= left + 1)
+                high--;
+
+            if (low <= high)
+                swap(po + left, po + right);
+        }
+        swap(po + left, po + high);
+        return high;
+    }
+    else if (select == 1)
+    {
+        int pivot = (po + left)->y;
+        int low = left + 1;
+        int high = right;
+
+        while (low <= high)
+        {
+            while (pivot >= (po + low)->y && low <= right)
+                low++;
+            while (pivot <= (po + high)->y && high >= left + 1)
+                high--;
+
+            if (low <= high)
+                swap(po + left, po + right);
+        }
+        swap(po + left, po + high);
+        return high;
+    }
+}
+
+void QuickSort(Point* po, int left, int right, int select)
+{
+    if (left <= right)
+    {
+        int pivot = Partition(po, left, right, select);
+        QuickSort(po, left, pivot - 1, select);
+        QuickSort(po, pivot + 1, right, select);
+    }
 }
