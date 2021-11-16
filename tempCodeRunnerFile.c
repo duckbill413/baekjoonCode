@@ -1,36 +1,35 @@
 #include <stdio.h>
-
-int fibonacci(int, int *, int *);
-
+#include <string.h>
+#define cnt 8
 int main()
 {
-    int n;
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++)
+    char result[20];
+    int num[cnt];
+    for (int i = 0; i < cnt; i++)
     {
-        int num;
-        scanf("%d", &num);
-        int cnt0 = 0, cnt1 = 0;
+        scanf("%d", &num[i]);
+    }
 
-        int result = fibonacci(num, &cnt0, &cnt1);
-        printf("%d %d\n", cnt0, cnt1);
+    int flag = 0;
+    for (int i = 0; i < cnt - 1; i++)
+    {
+        if (num[i] < num[i + 1] && flag == 0)
+            flag = 1;
+        if (num[i] > num[i + 1] && flag == 0)
+            flag = 2;
+        if (num[i] < num[i + 1] && flag == 2)
+            flag = 3;
+        if (num[i] > num[i + 1] && flag == 1)
+            flag = 3;
     }
+
+    if (flag == 1)
+        strcpy(result, "ascending");
+    else if (flag == 2)
+        strcpy(result, "desending");
+    else if (flag == 3)
+        strcpy(result, "mixed");
+
+    printf("%s", result);
     return 0;
-}
-int fibonacci(int n, int *cnt0, int *cnt1)
-{
-    if (n == 0)
-    {
-        (*cnt0)++;
-        return 0;
-    }
-    else if (n == 1)
-    {
-        (*cnt1)++;
-        return 1;
-    }
-    else
-    {
-        return fibonacci(n - 1, cnt0, cnt1) + fibonacci(n - 2, cnt0, cnt1);
-    }
 }
