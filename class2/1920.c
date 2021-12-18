@@ -1,3 +1,5 @@
+//중요도!!!
+//퀵소트, 이분탐색
 #include <stdio.h>
 #include <stdlib.h>
 
