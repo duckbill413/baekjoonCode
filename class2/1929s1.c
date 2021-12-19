@@ -13,7 +13,6 @@ int main()
     scanf("%d %d", &M, &N);
 
     Eratosthenes(primeNum);
-
     for (int i = M; i <= N; i++)
         if (primeNum[i] != 0)
             printf("%d\n", primeNum[i]);
