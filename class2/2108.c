@@ -1,15 +1,18 @@
+//중요도!!!!!
+//퀵소트, 합병정렬 오름차순
+//최빈값 구하기
 #include <stdio.h>
 #include <stdlib.h>
 
-// int compare(const void *left, const void *right)
-// {
-//     int a = *(int *)left;
-//     int b = *(int *)right;
-//     if (a > b)
-//         return 1;
-//     else
-//         return -1;
-// }
+int compare(const void *left, const void *right)
+{
+    int a = *(int *)left;
+    int b = *(int *)right;
+    if (a > b)
+        return 1;
+    else
+        return -1;
+}
 void MergeTwoArea(int *num, int left, int mid, int right);
 void Mergesort(int *num, int left, int right);
 int Mode(int *num, int N);
@@ -29,8 +32,8 @@ int main()
     printf("%.lf\n", avg);
 
     //중앙값
-    // qsort(num, N, sizeof(int), compare);//quicksort
-    Mergesort(num, 0, N - 1); // Mergesort
+    qsort(num, N, sizeof(int), compare); // quicksort
+    // Mergesort(num, 0, N - 1); // Mergesort
     int mid = N / 2;
     printf("%d\n", num[mid]);
 
