@@ -1,3 +1,5 @@
+//중요도!!
+//유클리드 호제법 - 최대, 최솟값 찾기
 #include <stdio.h>
 
 int gcd(int a, int b)
