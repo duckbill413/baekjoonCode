@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 int compare(const void *left, const void *right);
-int boolFind(int *pnum, int fi, int start, int end);
+int binarySearch(int *pnum, int fi, int start, int end);
 
 int main()
 {
@@ -25,7 +25,7 @@ int main()
 
     for (int i = 0; i < M; i++)
     {
-        printf("%d\n", boolFind(Nnum, Mnum[i], 0, N - 1));
+        printf("%d\n", binarySearch(Nnum, Mnum[i], 0, N - 1));
     }
 
     free(Nnum);
@@ -41,7 +41,7 @@ int compare(const void *left, const void *right)
     else
         return 1;
 }
-int boolFind(int *pnum, int fi, int start, int end)
+int binarySearch(int *pnum, int fi, int start, int end)
 {
     if (start > end)
         return 0;
@@ -50,9 +50,9 @@ int boolFind(int *pnum, int fi, int start, int end)
         return 1;
 
     if (pnum[mid] > fi)
-        return boolFind(pnum, fi, start, mid - 1);
+        return binarySearch(pnum, fi, start, mid - 1);
     else
-        return boolFind(pnum, fi, mid + 1, end);
+        return binarySearch(pnum, fi, mid + 1, end);
 }
 
 /*
