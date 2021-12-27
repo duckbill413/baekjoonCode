@@ -1,3 +1,5 @@
+//중요도!!!!
+//각 층에 대하여 모든 경우 생각
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
