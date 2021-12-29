@@ -1,7 +1,6 @@
 //중요도!!!!!
 //백준 1655 가운데를 말해요
 #include <iostream>
-#include <algorithm>
 #define HEAP_LEN 100010
 using namespace std;
 
@@ -92,7 +91,7 @@ void Input(Data *Arr)
     for (int i = 0; i < N; i++)
         cin >> Arr[i];
 }
-bool HIsEmpty(bool T) s
+bool HIsEmpty(bool T)
 {
     if (T == true)
     {
