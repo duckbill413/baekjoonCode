@@ -59,3 +59,7 @@ dkms.conf
 # End of https://www.toptal.com/developers/gitignore/api/c
 *.json
 *.cd
+
+# Test files
+class3/tempCodeRunnerFile.c
+class3/test.cpp
