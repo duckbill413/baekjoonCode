@@ -67,8 +67,6 @@ int main()
 }
 void bfs(int start, vector<int> *data, int *visit)
 {
-    int maxRange = 0;
-    int Range = 0;
     queue<int> q;
     q.push(start);
     visit[start] = 0;
