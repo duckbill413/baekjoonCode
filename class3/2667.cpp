@@ -8,7 +8,6 @@ const int dx[] = {-1, 1, 0, 0};
 const int dy[] = {0, 0, -1, 1};
 
 int N;
-int cnt = 0;
 
 void dfs(pair<int, int> p, int **map, bool **visit, vector<int> &size);
 
@@ -36,13 +35,12 @@ int main()
             {
                 size.push_back(0);
                 dfs(make_pair(i, j), map, visit, size);
-                cnt++;
             }
 
     sort(size.begin(), size.end()); //오름차순 정렬
     // sort(size.begin(), size.end(), greater<int>()); //내림차순 정렬
 
-    cout << cnt << endl;
+    cout << size.size() << endl;
     for (int i = 0; i < size.size(); i++)
         cout << size[i] << endl;
 
@@ -57,7 +55,7 @@ int main()
 void dfs(pair<int, int> p, int **map, bool **visit, vector<int> &size)
 {
     visit[p.first][p.second] = true;
-    size[cnt] += 1;
+    *(size.end() - 1) += 1;
     for (int i = 0; i < 4; i++)
     {
         int nx = p.first + dx[i];
