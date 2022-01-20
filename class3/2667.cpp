@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 const int dx[] = {-1, 1, 0, 0};
@@ -37,6 +38,9 @@ int main()
                 dfs(make_pair(i, j), map, visit, size);
                 cnt++;
             }
+
+    sort(size.begin(), size.end()); //오름차순 정렬
+    // sort(size.begin(), size.end(), greater<int>()); //내림차순 정렬
 
     cout << cnt << endl;
     for (int i = 0; i < size.size(); i++)
