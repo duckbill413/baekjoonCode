@@ -12,8 +12,8 @@ const int dy[] = {0, 0, -1, 1}; //가로
 int N, M;                       // N은 세로, M은 가로
 
 //최소 일수를 구하므로 BFS 알고리즘 이용
-void BFS(int **map, int **visit);
-void setQue(queue<pair<int, int>> *q, int **map, int **visit);
+void BFS(int **map, int **visit, int **time);
+void setQue(queue<pair<int, int>> *q, int **map, int **visit, int **time);
 int main()
 {
     cin >> M >> N;
@@ -27,22 +27,27 @@ int main()
     for (int i = 0; i < N; i++)
         visit[i] = new int[M]();
 
+    int **time = new int *[N];
+    for (int i = 0; i < N; i++)
+        time[i] = new int[M]();
+
     for (int i = 0; i < N; i++)
         for (int j = 0; j < M; j++)
             cin >> map[i][j];
 
-    BFS(map, visit);
-    int Time = -1;
+    BFS(map, visit, time);
+    int Time = 0;
     int flag = 0;
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < M; j++)
         {
-            if (map[i][j] != -1 && visit[i][j] > Time)
+            if (map[i][j] != -1 && visit[i][j])
             {
-                Time = visit[i][j];
+                if (Time < time[i][j])
+                    Time = time[i][j];
             }
-            if (map[i][j] != -1 && visit[i][j] == 0)
+            if (map[i][j] != -1 && !visit[i][j])
             {
                 flag = 1;
                 break;
@@ -54,17 +59,19 @@ int main()
     if (flag)
         cout << -1;
     else
-        cout << Time - 1;
+        cout << Time;
 
     for (int i = 0; i < N; i++)
     {
         delete[] map[i];
         delete[] visit[i];
+        delete[] time[i];
     }
+    delete[] time;
     delete[] map;
     delete[] visit;
 }
-void setQue(queue<pair<int, int>> *q, int **map, int **visit)
+void setQue(queue<pair<int, int>> *q, int **map, int **visit, int **time)
 {
     for (int i = 0; i < N; i++)
         for (int j = 0; j < M; j++)
@@ -72,14 +79,15 @@ void setQue(queue<pair<int, int>> *q, int **map, int **visit)
             if (map[i][j] == 1)
             {
                 visit[i][j] = 1;
+                time[i][j] = 0;
                 q->push(make_pair(i, j));
             }
         }
 }
-void BFS(int **map, int **visit)
+void BFS(int **map, int **visit, int **time)
 {
     queue<pair<int, int>> q;
-    setQue(&q, map, visit);
+    setQue(&q, map, visit, time); //토마토가 있을 경우 우선적으로 탐색해 주기 위함
     while (!q.empty())
     {
         int x = q.front().first;
@@ -93,7 +101,8 @@ void BFS(int **map, int **visit)
             if ((nx >= 0 && ny >= 0) && (nx < N && ny < M) && map[nx][ny] == 0 && visit[nx][ny] == 0)
             {
                 q.push(make_pair(nx, ny));
-                visit[nx][ny] = visit[x][y] + 1;
+                visit[nx][ny] = 1;
+                time[nx][ny] = time[x][y] + 1;
             }
         }
     }
