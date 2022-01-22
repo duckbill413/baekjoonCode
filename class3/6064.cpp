@@ -1,3 +1,5 @@
+// 중요도!!
+// 카잉달력 <- 유클리드 호제법, 큐 사용
 #include <iostream>
 #include <vector>
 #include <queue>
