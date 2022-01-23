@@ -31,7 +31,7 @@ int main()
         int ans = 1;
         for (auto i : map)
         {
-            cout << "map: " << i.second << '\n';
+            // cout << "map: " << i.second << '\n';
             ans *= (i.second + 1);
         }
         ans--;
