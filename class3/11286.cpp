@@ -1,3 +1,5 @@
+//중요도!!!!
+//우선순위 힙 compare을 이용한 정렬
 #include <iostream>
 #include <queue>
 #include <vector>
