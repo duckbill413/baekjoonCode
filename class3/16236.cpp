@@ -1,3 +1,6 @@
+// 16236 아기 상어
+// importance!!!!
+// BFS algorithm per node
 #include <iostream>
 #include <vector>
 #include <queue>
