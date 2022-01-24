@@ -1,6 +1,6 @@
-// Å×Æ®·Î¹Ì³ë
-// Áß¿äµµ!!!
-// DFS, ºê·çÆ®Æ÷½º
+// ï¿½ï¿½Æ®ï¿½Î¹Ì³ï¿½
+// ï¿½ß¿äµµ!!!
+// DFS, ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -8,8 +8,8 @@
 using namespace std;
 const int dx[] = {-1, 1, 0, 0};
 const int dy[] = {0, 0, -1, 1};
-int ans = 0, N, M; //Á¤´ä(°¡Àå Å« °ª), ¼¼·Î, °¡·Î
-// DFS ¤Ç¸ð¾ç Á¦¿Ü DFS »ç¿ëÇÏ¿© Å½»ö
+int ans = 0, N, M; //ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ Å« ï¿½ï¿½), ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½
+// DFS ï¿½Ç¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DFS ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ Å½ï¿½ï¿½
 void DFS(pair<int, int> p, vector<vector<int>> &board, vector<vector<int>> &visit, int sum, int size)
 {
     if (size == 4)
@@ -23,7 +23,7 @@ void DFS(pair<int, int> p, vector<vector<int>> &board, vector<vector<int>> &visi
 
     if (!visit[p.first][p.second])
     {
-        //¹æ¹® ¿©ºÎÀÇ °æ¿ì ÇÑ »çÀÌÅ¬¿¡ ´ëÇØ¼­¸¸ À¯È¿ÇÏ¹Ç·Î ÀÌÈÄ ÃÊ±âÈ­
+        //ï¿½æ¹® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½Ï¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         visit[p.first][p.second] = 1;
         for (int i = 0; i < 4; i++)
             DFS(make_pair(p.first + dx[i], p.second + dy[i]), board, visit, sum + board[p.first][p.second], size + 1);
@@ -48,7 +48,7 @@ int main()
         {
             DFS(make_pair(i, j), board, visited, 0, 0);
 
-            //¤Ç, ¤Ì ¸ð¾çÀÏ¶§
+            //ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½
             if (j + 2 < M)
             {
                 int tmp = board[i][j] + board[i][j + 1] + board[i][j + 2];
@@ -57,7 +57,7 @@ int main()
                 if (i > 0)
                     ans = MAX(ans, tmp + board[i - 1][j + 1]);
             }
-            //¤¿, ¤Ã ¸ð¾çÀÏ¶§
+            //ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½
             if (i + 2 < N)
             {
                 int tmp = board[i][j] + board[i + 1][j] + board[i + 2][j];
