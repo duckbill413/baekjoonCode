@@ -1,6 +1,6 @@
 // 테트로미노
 // 중요도!!!
-// DFS, 브루트포스
+// DFS, 브루트포스 알고리즘
 #include <iostream>
 #include <vector>
 #include <utility>
