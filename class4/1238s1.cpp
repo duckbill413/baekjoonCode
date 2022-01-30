@@ -1,3 +1,4 @@
+// 1238 파티
 // 중요도!!!!
 // 다익스트라 알고리즘(길찾기) <= 시간복잡도 Big(ElogN) : E는 간선의 개수
 /*
@@ -19,8 +20,8 @@ struct compare
         return a.second > b.second;
     }
 };
-void ValueInit(vector<int> &visited, vector<int> &Dist);
-void Dijkstra(int start, vector<vector<P>> &road, vector<int> &visited, vector<int> &Dist);
+void ValueInit(vector<int> &Dist);
+void Dijkstra(int start, vector<vector<P>> &road, vector<int> &Dist);
 int main()
 {
     ios::sync_with_stdio(false);
@@ -29,7 +30,6 @@ int main()
     int N, M, X;
     cin >> N >> M >> X;
     vector<vector<P>> road(N + 1, vector<P>()); // 정점 -> 목적지 & 비용
-    vector<int> visited(N + 1, 0);              // 방문 확인
     vector<int> Dist(N + 1, INF);               //다익스트라 알고리즘 실행 중 비용 저장
     vector<int> cost(N + 1, 0);                 //각 노드 별 비용 저장
     for (int i = 0; i < M; i++)
@@ -43,12 +43,12 @@ int main()
     {
         if (i == X) // i==X인 경우의 거리는 0 고정
             continue;
-        Dijkstra(i, road, visited, Dist);
+        Dijkstra(i, road, Dist);
         cost[i] += Dist[X];
-        ValueInit(visited, Dist);
-        Dijkstra(X, road, visited, Dist);
+        ValueInit(Dist);
+        Dijkstra(X, road, Dist);
         cost[i] += Dist[i];
-        ValueInit(visited, Dist);
+        ValueInit(Dist);
     }
     int longest = 0;
     for (int i = 1; i <= N; i++)
@@ -57,7 +57,7 @@ int main()
     cout << longest;
     return 0;
 }
-void Dijkstra(int start, vector<vector<P>> &road, vector<int> &visited, vector<int> &Dist)
+void Dijkstra(int start, vector<vector<P>> &road, vector<int> &Dist)
 {
     priority_queue<P, vector<P>, compare> pq;
     pq.push(make_pair(start, 0));
@@ -81,12 +81,8 @@ void Dijkstra(int start, vector<vector<P>> &road, vector<int> &visited, vector<i
         }
     }
 }
-void ValueInit(vector<int> &visited, vector<int> &Dist)
+void ValueInit(vector<int> &Dist)
 {
-    int size = visited.size();
-    for (int i = 0; i < visited.size(); i++)
-    {
-        visited[i] = 0;
+    for (int i = 0; i < Dist.size(); i++)
         Dist[i] = INF;
-    }
 }
