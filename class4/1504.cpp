@@ -44,6 +44,7 @@ int main()
     StoV1 = Dist[1];
     V1toV2 = Dist[v2];
     V1toN = Dist[N];
+    
     DistInit(Dist);
     Dijkstra(v2, pass, Dist);
     StoV2 = Dist[1];
