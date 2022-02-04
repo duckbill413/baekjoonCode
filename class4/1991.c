@@ -1,5 +1,5 @@
-//이진 트리
-//목적에 맞는 순회 함수의 구현
+// 1991 트리 순회
+// 이진트리, 전위, 중위, 후위 순회
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,7 +29,7 @@ void PostorderTraverse(BTreeNode *bt, VisitFuncPtr action); //후위
 //함수 포인터를 이용한 출력 함수
 void DeleteTree(BTData data)
 {
-    printf("%c ", data);
+    printf("%c", data);
 }
 int main()
 {
@@ -37,7 +37,10 @@ int main()
     scanf("%d", &N);
     getchar();
     char p, l, r;
-    BTreeNode *node;
+    int SIZE = 1;
+    for (int i = 1; i < N; i++)
+        SIZE *= 2;
+    BTreeNode *node[N];
     for (int i = 0; i < N; i++)
         node[i] = MakeBTreeNode();
     for (int i = 0; i < N; i++)
