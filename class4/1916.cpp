@@ -1,4 +1,5 @@
 // 1916 최소비용 구하기
+// 중요도!!!!!
 // 다악스트라
 #include <iostream>
 #include <vector>
