@@ -15,7 +15,6 @@ int main()
 
     int N, K;
     cin >> N >> K;
-
     vector<int> visited(SIZE, -1);
 
     Find(N, K, visited);
