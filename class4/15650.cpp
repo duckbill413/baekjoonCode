@@ -1,4 +1,4 @@
-// 15650 N°ú M(2)
+// 15650 Nê³¼ M(2)
 #include <iostream>
 #include <vector>
 #define LEN 10
@@ -28,7 +28,7 @@ void DFS(int start, int cnt, vector<int> &arr)
     }
     for (int i = start; i <= N; i++)
     {
-        // ¿À¸§Â÷¼øÀ¸·Î Á¤·ÄµÈ ¼ö¿­¸¸ Ãâ·ÂÇÏ¹Ç·Î ¹æ¹® °í·ÁÇÒ ÇÊ¿ä°¡ ¾øÀ½
+        // ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬ëœ ìˆ˜ì—´ë§Œ ì¶œë ¥í•˜ë¯€ë¡œ ë°©ë¬¸ ê³ ë ¤í•  í•„ìš”ê°€ ì—†ìŒ
         arr[cnt] = i;
         DFS(i + 1, cnt + 1, arr);
     }
