@@ -1,4 +1,4 @@
-//�߿䵵!!!!!
+// 중요도!!!!!
 // Stack_List base
 #include <stdio.h>
 #include <stdlib.h>
