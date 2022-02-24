@@ -12,7 +12,7 @@ struct compare
         return a.second > b.second;
     }
 };
-void Dijkstra(int start, vector<vector<P>> &Map, vector<int> &Dist, vector<vector<int>> &Pass);
+void Dijkstra(int start, vector<vector<P>> &Map, vector<int> &Dist, vector<int> &Pass);
 int main()
 {
     ios::sync_with_stdio(false);
@@ -23,7 +23,7 @@ int main()
     cin >> N >> M;
     vector<vector<P>> Map(N + 1, vector<P>());
     vector<int> Dist(N + 1, INF);
-    vector<vector<int>> Pass(N + 1, vector<int>());
+    vector<int> Pass(N + 1, 0);
     for (int i = 0; i < M; i++)
     {
         int s, e, t;
@@ -34,14 +34,21 @@ int main()
     cin >> S >> E;
 
     Dijkstra(S, Map, Dist, Pass);
-    Pass[E].push_back(E);
     cout << Dist[E] << '\n';
-    cout << Pass[E].size() << '\n';
-    for (int i = 0; i < Pass[E].size(); i++)
-        cout << Pass[E][i] << " ";
+
+    vector<int> ans;
+    int tmp = E;
+    while (tmp)
+    {
+        ans.push_back(tmp);
+        tmp = Pass[tmp];
+    }
+    cout << ans.size() << '\n';
+    for (int i = ans.size() - 1; i >= 0; i--)
+        cout << ans[i] << " ";
     return 0;
 }
-void Dijkstra(int start, vector<vector<P>> &Map, vector<int> &Dist, vector<vector<int>> &Pass)
+void Dijkstra(int start, vector<vector<P>> &Map, vector<int> &Dist, vector<int> &Pass)
 {
     priority_queue<P, vector<P>, compare> pq;
     pq.push({start, 0});
@@ -52,16 +59,18 @@ void Dijkstra(int start, vector<vector<P>> &Map, vector<int> &Dist, vector<vecto
         P cur = pq.top();
         pq.pop();
 
+        // pq에 같은 번호의 노드가 여러개 들어갈 수도 있는데, 과거 pq에 넣어준 최단거리가 최근 갱신한 최단거리보다 클 경우 다익스트라를 할 필요가 없음
+        if (cur.second > Dist[cur.first])
+            continue;
+
         for (int i = 0; i < Map[cur.first].size(); i++)
         {
             P next = Map[cur.first][i];
             int cost = cur.second + next.second;
-            if (cost <= Dist[next.first])
+            if (cost < Dist[next.first])
             {
-                if (cost == Dist[next.first])
-                    Pass[next.first].erase(Pass[next.first].end() - 1);
+                Pass[next.first] = cur.first;
                 Dist[next.first] = cost;
-                Pass[next.first].push_back(cur.first);
                 pq.push({next.first, cost});
             }
         }
