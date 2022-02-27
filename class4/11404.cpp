@@ -42,6 +42,6 @@ void FloydMarshall(vector<vector<int>> &table)
     for (int k = 1; k <= N; k++)
         for (int i = 1; i <= N; i++)
             for (int j = 1; j <= N; j++)
-                if (table[i][k] != INF && table[k][j])
+                if (table[i][k] != INF && table[k][j] != INF)
                     table[i][j] = min(table[i][j], table[i][k] + table[k][j]);
 }
