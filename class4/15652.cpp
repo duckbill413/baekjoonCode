@@ -30,7 +30,6 @@ void DFS(int idx, int cnt, int target, vector<int> &visited)
         printNumber();
         return;
     }
-
     for (int i = idx; i <= N; i++)
     {
         if (visited[i] == 1 && i != idx)
