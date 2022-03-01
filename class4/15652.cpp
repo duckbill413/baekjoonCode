@@ -6,7 +6,7 @@ using namespace std;
 int N, M;
 vector<int> print(9, 0);
 void printNumber();
-void DFS(int idx, int cnt, int target, vector<int> &visited);
+void DFS(int idx, int cnt, int target);
 int main()
 {
     ios::sync_with_stdio(false);
@@ -14,8 +14,7 @@ int main()
     cout.tie(0);
 
     cin >> N >> M;
-    vector<int> visited(N + 1, 0);
-    DFS(1, 0, M, visited);
+    DFS(1, 0, M);
 }
 void printNumber()
 {
@@ -23,7 +22,7 @@ void printNumber()
         cout << print[i] << " ";
     cout << '\n';
 }
-void DFS(int idx, int cnt, int target, vector<int> &visited)
+void DFS(int idx, int cnt, int target)
 {
     if (cnt == target)
     {
@@ -32,11 +31,7 @@ void DFS(int idx, int cnt, int target, vector<int> &visited)
     }
     for (int i = idx; i <= N; i++)
     {
-        if (visited[i] == 1 && i != idx)
-            continue;
-        visited[i] = 1;
         print[cnt] = i;
-        DFS(i, cnt + 1, target, visited);
-        visited[i] = 0;
+        DFS(i, cnt + 1, target);
     }
 }
