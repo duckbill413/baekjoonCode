@@ -20,7 +20,13 @@ struct compare
 
 bool findBag(int start, int end, int target, vector<int> &bag)
 {
-
+    if (start > end)
+    {
+        if (bag[start] <= target)
+            return 1;
+        else
+            return 0;
+    }
     int mid = (start + end) / 2;
     if (bag[mid] == target)
         return 1;
