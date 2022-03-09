@@ -1,40 +1,12 @@
-// 1202 보석 도둑(수정중)
+// 1202 보석 도둑
+// 작은 가방에 최대한 가치가 큰 보석을 담아야 한다.
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <algorithm>
 using namespace std;
-typedef struct jewel
-{
-    int m; // weight
-    int v; // price
-} Jewel;
+typedef pair<int, int> P;
 
-struct compare
-{
-    bool operator()(Jewel a, Jewel b)
-    {
-        return a.v < b.v;
-    }
-};
-
-bool findBag(int start, int end, int target, vector<int> &bag)
-{
-    if (start > end)
-    {
-        if (bag[start] <= target)
-            return 1;
-        else
-            return 0;
-    }
-    int mid = (start + end) / 2;
-    if (bag[mid] == target)
-        return 1;
-    else if (bag[mid] < target)
-        return findBag(0, mid - 1, target, bag);
-    else
-        return findBag(mid + 1, end, target, bag);
-}
 int main()
 {
     ios::sync_with_stdio(false);
@@ -43,26 +15,32 @@ int main()
 
     int N, K;
     cin >> N >> K;
-    priority_queue<Jewel, vector<Jewel>, compare> q;
+    vector<P> jewel(N);
     for (int i = 0; i < N; i++)
     {
-        Jewel tmp;
-        cin >> tmp.m >> tmp.v;
-        q.push(tmp);
+        int m, v;
+        cin >> m >> v; // m은 무게, v는 가격
+        jewel[i] = make_pair(m, v);
     }
-    vector<int> bag(K, 0);
+    sort(jewel.begin(), jewel.end()); //보석 무게를 기준으로 오름차순 정렬
+    vector<int> bag(K);
     for (int i = 0; i < K; i++)
         cin >> bag[i];
-    sort(bag.begin(), bag.end());
+    sort(bag.begin(), bag.end()); // 가방 오름차순 정렬
 
-    int total = 0;
+    long long result = 0;
+    priority_queue<int> pq; //가치가 큰 순서로 저장
+    int idx = 0;
     for (int i = 0; i < K; i++)
     {
-        Jewel target = q.top();
-        q.pop();
+        while (idx < N && jewel[idx].first <= bag[i])
+            pq.push(jewel[idx++].second);
 
-        if (findBag(0, K - 1, target.m, bag))
-            total += target.v;
+        if (!pq.empty()) //가방에는 한개의 보석만 담을 수 있다.
+        {
+            result += pq.top();
+            pq.pop();
+        }
     }
-    cout << total;
+    cout << result;
 }
