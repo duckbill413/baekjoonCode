@@ -1,4 +1,7 @@
 // 1647 도시 분할 계획
+// 중요도!!!!
+// 크루스칼 알고리즘
+// 가중치들을 오름차순으로 정렬한 후에 가장 작은 가중치들부터 연결해 나가는 방식
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -7,7 +10,7 @@ using namespace std;
 typedef pair<int, pair<int, int>> T;
 
 int findParent(int, vector<int> &);
-void unionEdge(int, int, vector<int> &, int &);
+void unionEdge(int, int, vector<int> &);
 int sameParent(int, int, vector<int> &);
 int main()
 {
@@ -34,11 +37,12 @@ int main()
     {
         if (!sameParent(Edge[i].second.first, Edge[i].second.second, parent))
         {
-            unionEdge(Edge[i].second.first, Edge[i].second.second, parent, N);
+            unionEdge(Edge[i].second.first, Edge[i].second.second, parent);
             total += Edge[i].first;
             final = Edge[i].first;
         }
     }
+    // final = 가중치가 가장 큰 간선 <= 이 간선을 끊음으로서 2개의 최소 스패닝 트리를 생성할 수 있다.
     cout << total - final;
 }
 int findParent(int s, vector<int> &parent)
@@ -58,14 +62,11 @@ int sameParent(int s, int e, vector<int> &parent)
     else
         return false;
 }
-void unionEdge(int s, int e, vector<int> &parent, int &N)
+void unionEdge(int s, int e, vector<int> &parent)
 {
     s = findParent(s, parent);
     e = findParent(e, parent);
 
     if (s != e)
-    {
         parent[e] = s;
-        N--;
-    }
 }
