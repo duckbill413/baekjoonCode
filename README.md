@@ -1,3 +1,4 @@
 # baekjoonCode
 백준 문제 풀이
-<img align='right' src="http://mazassumnida.wtf/api/v2/generate_badge?boj=uhyeon7399">
+
+C / C++ 로 진행되었습니다.
